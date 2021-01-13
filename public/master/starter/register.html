@@ -44,7 +44,7 @@
     </div>
   </nav>
 
-<div class="page-content page-auth">
+<div class="page-content page-auth" id="register">
   <div class="section-store-auth" data-aos="fade-up">
     <div class="container">
       <div class="row align-items-center justify-content-center row-login">
@@ -96,10 +96,10 @@
               </select>
             </div>
 
-            <a href="#" class="btn btn-success btn-block w-75 mt-4">
+            <a href="#" class="btn btn-success btn-block mt-4">
               Sign Up Now
             </a>
-            <a href="#" class="btn btn-signup btn-block w-75 mt-2">
+            <a href="#" class="btn btn-signup btn-block mt-2">
               Back to Sign In
             </a>
           </form>
@@ -128,6 +128,33 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
+  </script>
+  <script src="vendor/vue/vue.js"></script>
+  <script src="https://unpkg.com/vue-toasted"></script>
+  <script>
+    Vue.use(Toasted);
+
+    var register = new Vue({
+      el: '#register',
+      mounted() {
+        AOS.init();
+        this.$toasted.error(
+          "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
+          {
+            position: "top-center",
+            className: "rounded",
+            duration: 1000,
+          }
+        );
+      },
+      data: {
+        name: "Fathul Muii",
+        email: "fmuiin14@gmail.com",
+        password: "",
+        is_store_open: true,
+        store_name: ""
+      }
+    });
   </script>
   <script src="/script/navbar-scroll.js"></script>
 </body>
