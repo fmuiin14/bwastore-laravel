@@ -19,7 +19,7 @@
                     <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
                         <a href="#" class="component-categories d-block">
                             <div class="categories-image">
-                                <img src="images/categories-gadgets.svg" alt="gadget" class="w-100">
+                                <img src="/images/categories-gadgets.svg" alt="gadget" class="w-100">
                             </div>
                             <p class="categories-text">Gadgets</p>
                         </a>

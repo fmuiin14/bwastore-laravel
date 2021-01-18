@@ -17,6 +17,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/categories', 'CategoryController@index')->name('category');
 
+Route::get('/details/{id}', 'DetailController@index')->name('detail');
+
 // Route::get('/', function () {
 //     return view('pages.home');
 // });
