@@ -19,6 +19,8 @@ Route::get('/categories', 'CategoryController@index')->name('category');
 
 Route::get('/details/{id}', 'DetailController@index')->name('detail');
 
+Route::get('/cart', 'CartController@index')->name('cart');
+
 // Route::get('/', function () {
 //     return view('pages.home');
 // });
