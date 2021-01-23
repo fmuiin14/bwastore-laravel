@@ -10,7 +10,7 @@
     <title>@yield('title')</title>
     @stack('prepend-style')
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link href="style/main.css" rel="stylesheet" />
+    <link href="/style/main.css" rel="stylesheet" />
     @stack('addon-style')
 </head>
 
@@ -23,7 +23,7 @@
                     <img src="/images/dashboard-store-logo.svg" alt="" class="my-4" />
                 </div>
                 <div class="list-group list-group-flush">
-                    <a href="/dashboard.html" class="list-group-item list-group-item-action active">Dashboard</a>
+                    <a href="/dashboard.html" class="list-group-item list-group-item-action">Dashboard</a>
                     <a href="/dashboard-products.html" class="list-group-item list-group-item-action">My Products</a>
                     <a href="/dashboard-transactions.html"
                         class="list-group-item list-group-item-action">Transactions</a>
