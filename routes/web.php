@@ -37,6 +37,10 @@ Route::get('/dashboard/transactions', 'DashboardTransactionController@index')->n
 
 Route::get('/dashboard/transactions/{id}', 'DashboardTransactionController@details')->name('dashboard-transaction-details');
 
+Route::get('/dashboard/settings', 'DashboardSettingController@store')->name('dashboard-settings-store');
+
+Route::get('/dashboard/account', 'DashboardSettingController@account')->name('dashboard-settings-account');
+
 // Route::get('/', function () {
 //     return view('pages.home');
 // });
