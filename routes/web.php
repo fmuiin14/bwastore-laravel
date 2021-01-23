@@ -33,6 +33,8 @@ Route::get('/dashboard/products/create', 'DashboardProductController@create')->n
 
 Route::get('/dashboard/products/{id}', 'DashboardProductController@details')->name('dashboard-product-details');
 
+Route::get('/dashboard/transactions', 'DashboardTransactionController@index')->name('dashboard-transaction');
+
 // Route::get('/', function () {
 //     return view('pages.home');
 // });
