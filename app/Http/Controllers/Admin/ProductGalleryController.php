@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-use App\Http\Requests\Admin\ProductRequest;
+use App\Http\Requests\Admin\ProductGalleryRequest;
 use App\User;
 use App\Category;
+use App\ProductGallery;
 use Yajra\DataTables\Facades\DataTables;
 
-class ProductController extends Controller
+class ProductGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class ProductController extends Controller
     {
         if(request()->ajax())
         {
-            $query = Product::with(['user','category']);
+            $query = ProductGallery::with(['product']);
 
             return Datatables::of($query)
             ->addColumn('action', function($item) {
@@ -49,8 +50,10 @@ class ProductController extends Controller
                     </div>
                 ';
             })
-            
-            ->rawColumns(['action'])
+            ->editColumn('photos', function($item) {
+                return $item->photos ? '<img src="'. Storage::url($item->photos) .'" style="max-height:80px;">' : '';
+            })
+            ->rawColumns(['action','photos'])
             ->make();
         }
         

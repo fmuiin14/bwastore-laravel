@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class ProductGallery extends Model
 {
     protected $fillable = [
-        'photos', 'products.id'
-];
+        'photos', 'products_id'
+    ];
 
-protected $hidden [
+    protected $hidden = [
 
-];
+    ];
 
-public function product() {
-    return $this->belongsTo(Product::class, 'products_id', 'id');
-}
+    public function product() {
+        return $this->belongsTo(Product::class, 'products_id', 'id');
+    }
 }
