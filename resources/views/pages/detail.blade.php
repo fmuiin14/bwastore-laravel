@@ -56,17 +56,28 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h1>Sofa Ternyaman</h1>
+                        <h1>{{$product->name}}</h1>
                         <div class="owner">
-                            By Fathul Muiin
+                            By {{$product->user->store_name}}
                         </div>
-                        <div class="price">$1,409</div>
+                        <div class="price">$ {{number_format($product->price)}}</div>
                     </div>
 
                     <div class="col-lg-2" data-aos="zoom-in">
-                        <a href="#" class="btn btn-success px-4 text-white btn-block mb-3">
-                            Add to cart
-                        </a>
+                        @auth
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <button type="submit" class="btn btn-success px-4 text-white btn btn-block mb-3">
+                                Add to Cart
+                            </button>
+                        </form>
+                            @else
+
+                            <a href="{{route('login')}}" class="btn btn-success px-4 text-white btn-block mb-3">
+                            Sign in to Add
+                            </a>
+                        @endauth
                     </div>
 
                 </div>
@@ -76,18 +87,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit dolorem nesciunt
-                            veritatis cum reprehenderit provident autem dolorum quasi rem? Reprehenderit,
-                            accusantium corrupti itaque ut magnam odit dicta similique nemo, omnis cupiditate
-                            laudantium eum repudiandae labore eligendi inventore ratione. Deleniti, quis
-                            voluptates. Ducimus asperiores nisi qui odit provident quasi dicta aliquam sequi
-                            rem, soluta ipsa eaque debitis facilis iusto incidunt officiis repudiandae at
-                            necessitatibus tenetur accusantium quam neque quis! Rem, placeat!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, quaerat! Fugit eius
-                            commodi rem, adipisci officia, temporibus minus deleniti atque soluta recusandae
-                            iure. Ullam sit illum, dolor autem consequuntur tempore quam quas eligendi, harum
-                            neque sapiente? Sint vero molestiae necessitatibus tempore quos. Blanditiis eveniet
-                            esse sequi quis iusto, quia laborum.</p>
+                        <p>{{!! $product->description !!}}</p>
                     </div>
                 </div>
             </div>
@@ -147,22 +147,13 @@
             },
             data: {
                 activePhoto: 1,
-                photos: [{
-                        id: 1,
-                        url: "/images/product-details-1.jpg"
-                    },
-                    {
-                        id: 2,
-                        url: "/images/product-details-2.jpg"
-                    },
-                    {
-                        id: 3,
-                        url: "/images/product-details-3.jpg"
-                    },
-                    {
-                        id: 4,
-                        url: "/images/product-details-4.jpg"
-                    },
+                photos: [
+                    @foreach($product->galleries as $gallery)
+                        {
+                        id: {{$gallery->id}},
+                        url: "{{Storage::url($gallery->photos)}}",
+                        },
+                    @endforeach
                 ],
             },
             methods: {
