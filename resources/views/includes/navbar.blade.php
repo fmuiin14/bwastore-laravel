@@ -17,9 +17,9 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">Rewards</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">Sign Up</a>
-                </li>
+                </li> -->
                 @guest
                     <li class="nav-item">
                         <a href="{{route('register')}}" class="nav-link">Sign Up</a>
