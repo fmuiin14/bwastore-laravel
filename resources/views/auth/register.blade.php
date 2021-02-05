@@ -30,7 +30,9 @@
                             <label for="email">Email Address</label>
                            
                             <input id="email" type="email" v-model="email"
+                            @change="checkForEmailAvailable()"
                                 class="form-control @error('email') is-invalid @enderror"
+                                :class="{ 'is-invalid' : this.email_unavailable }"
                                 name="email" value="{{ old('email') }}" required autocomplete="email">
 
                             @error('email')
@@ -106,7 +108,8 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-block mt-4">
+                        <button type="submit" class="btn btn-success btn-block mt-4"
+                        :disabled="this.email_unavailable">
                             Sign Up Now
                         </button>
                         <a href="{{route('login')}}" class="btn btn-signup btn-block mt-2">
@@ -123,6 +126,7 @@
 @push('addon-script')
     <script src="/vendor/vue/vue.js"></script>
     <script src="https://unpkg.com/vue-toasted"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         Vue.use(Toasted);
 
@@ -138,13 +142,53 @@
                 //     }
                 // );
             },
-            data: {
-                name: "Fathul Muii",
-                email: "fmuiin14@gmail.com",
-                password: "",
-                is_store_open: true,
-                store_name: ""
-            }
+            methods: {
+                checkForEmailAvailable: function() {
+                    var self = this;
+                    axios.get('{{ route('api-register-check') }}', {
+                        params: {
+                            email: this.email
+                        }
+                    })
+
+                    .then(function(response) {
+                        if(response.data == 'Available') {
+                            self.$toasted.show(
+                            "Email Anda tersedia! Silakan lanjut langkah selanjutnya.",
+                            {
+                            position: "top-center",
+                            className: "rounded",
+                            duration: 1000,
+                            }
+                            );
+                            self.email_unavailable = false;
+
+                        } else {
+                            self.$toasted.error(
+                                "Maaf, tampaknya email sudah terdaftar pada sistem kami.",
+                                {
+                                    position: "top-center",
+                                    className: "rounded",
+                                    duration: 1000,
+                                }
+                            );
+                            self.email_unavailable = true;
+                        }
+
+                        // handle success
+                        console.log(response)
+                    })
+                }
+            },
+            data() {
+                return {
+                    name: "Fathul Muii",
+                    email: "fmuiin14@gmail.com",
+                    is_store_open: true,
+                    store_name: "",
+                    email_unavailable: false
+                }
+            } 
         });
     </script>
 @endpush
