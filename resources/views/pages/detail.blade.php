@@ -159,8 +159,8 @@
             methods: {
                 changeActive(id) {
                     this.activePhoto = id;
-                }
-            }
+                },
+            },
         });
     </script>
 @endpush
